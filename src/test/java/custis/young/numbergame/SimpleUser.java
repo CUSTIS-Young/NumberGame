@@ -2,16 +2,17 @@ package custis.young.numbergame;
 
 public class SimpleUser implements User {
 
-    private final int theNumber;
     private final int upperBound;
+    private final int theNumber;
+    private long askCount = 0;
 
     public SimpleUser(int upperBound) {
-        this.upperBound = upperBound;
-        this.theNumber = (int) (Math.random() * upperBound);
+        this(upperBound, (int) (Math.random() * upperBound));
     }
 
-    public int getTheNumber() {
-        return theNumber;
+    public SimpleUser(int upperBound, int theNumber) {
+        this.upperBound = upperBound;
+        this.theNumber = theNumber;
     }
 
     @Override
@@ -19,8 +20,17 @@ public class SimpleUser implements User {
         return upperBound;
     }
 
+    public int getTheNumber() {
+        return theNumber;
+    }
+
+    public long getAskCount() {
+        return askCount;
+    }
+
     @Override
     public boolean theNumberIs(int guess) {
-        return (theNumber == guess);
+        askCount++;
+        return (guess == theNumber);
     }
 }
